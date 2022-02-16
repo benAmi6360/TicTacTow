@@ -3,6 +3,7 @@ using System.Linq;
 using System.Windows.Controls;
 using System.Windows.Media;
 using System.Diagnostics;
+using System.Threading;
 
 namespace TicTacTow
 {
@@ -22,22 +23,12 @@ namespace TicTacTow
         /// </summary>
         public void PlacingAlgorithm()
         {
-            if (!CanCPUWin())
-            {
-                if (!CanCPUBlock())
-                {
-                    if (!CanCPUBlockSpecificAlgo())
-                    {
-                        if (!CanCPUPlaceInMiddle())
-                        {
-                            if (!CanCPUPlaceInCorner())
-                            {
-                                PlaceInEmptySpace();
-                            }
-                        }
-                    }
-                }
-            }
+            if (CanCPUWin()) return;
+            if (CanCPUBlock()) return;
+            if (CanCPUBlockSpecificAlgo()) return;
+            if (CanCPUPlaceInMiddle()) return;
+            if (CanCPUPlaceInCorner()) return;
+            PlaceInEmptySpace();
         }
         /// <summary>
         /// Checks if the CPU can win
@@ -302,22 +293,24 @@ namespace TicTacTow
         /// The TextBlock Element
         /// </summary>
         private TextBlock txt;
+        /// <summary>
+        /// Stores the number of games
+        /// </summary>
+        private int NumberOfGames = 0;
         #endregion
-        public GameManager(Grid c, TextBlock t)
-        {
-            _Container = c;
-            txt = t;
-        }
         /// <summary>
         /// Initiate a new game
         /// </summary>
-        public void NewGame()
+        public void NewGame(Grid Container, TextBlock t)
         {
-            _Container.Children.Cast<Button>().ToList().ForEach(btn =>
+            NumberOfGames++;
+            Container.Children.Cast<Button>().ToList().ForEach(btn =>
             {
                 btn.Content = string.Empty;
                 btn.IsEnabled = true;
             });
+            _Container = Container;
+            txt = t;
             Moves = new CPUMoves(this);
             table = new MarkType[3, 3];
             if (IsCPUFirst() == true) Moves.PlacingAlgorithm();
@@ -341,11 +334,12 @@ namespace TicTacTow
             State = new GameState(table);
             PlayerTurn(b);
             Moves.PlacingAlgorithm();
-            string res = State.IsGameWon() ? "You have lost" : "You have tied";
             if (State.IsGameWon() || State.IsGameTied())
             {
+                string res = State.IsGameWon() ? "You have lost" : "You have tied";
                 IsGameEnded = true;
-                NewGame();
+                NewGame(_Container, txt);
+                txt.Text = $"{res}.\nNumber of games: {NumberOfGames}";
             }
             PrintTable();
         }
@@ -373,6 +367,9 @@ namespace TicTacTow
         {
             return table[row, col] == MarkType.Free;
         }
+        /// <summary>
+        /// Prints the table to the output window in visual studio
+        /// </summary>
         private void PrintTable()
         {
             for (int i = 0; i < 3; i++)

@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:TicTacTow"
         mc:Ignorable="d"
         ResizeMode="NoResize"
-        Title="Tic Tac Toe" Height="1050" Width="900">
+        Title="Tic Tac Toe" Height="700" Width="600">
     <Window.Resources>
         <Style TargetType="Button">
             <Setter Property="Background" Value="White" /> 
@@ -14,31 +14,31 @@
             <Setter Property="FontSize" Value="80" />
         </Style>
     </Window.Resources>
-    <Grid x:Name="Container">
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*" />
-            <ColumnDefinition Width="*" />
-            <ColumnDefinition Width="*" />
-        </Grid.ColumnDefinitions>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="*" />
-            <RowDefinition Height="*" />
-            <RowDefinition Height="*" />
-            <RowDefinition Height="150" />
-        </Grid.RowDefinitions>
+    <StackPanel>
+        <Grid x:Name="Container" Height="600">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
 
-        <Button x:Name="Button0_0" Click="Button_Click" Grid.Column="0" Grid.Row="0" />
-        <Button x:Name="Button1_0" Click="Button_Click" Grid.Column="1" Grid.Row="0" />
-        <Button x:Name="Button2_0" Click="Button_Click" Grid.Column="2" Grid.Row="0" />
-                                                        
-        <Button x:Name="Button0_1" Click="Button_Click" Grid.Column="0" Grid.Row="1" />
-        <Button x:Name="Button1_1" Click="Button_Click" Grid.Column="1" Grid.Row="1" />
-        <Button x:Name="Button2_1" Click="Button_Click" Grid.Column="2" Grid.Row="1" />
-                                                        
-        <Button x:Name="Button0_2" Click="Button_Click" Grid.Column="0" Grid.Row="2" />
-        <Button x:Name="Button1_2" Click="Button_Click" Grid.Column="1" Grid.Row="2" />
-        <Button x:Name="Button2_2" Click="Button_Click" Grid.Column="2" Grid.Row="2" />
+            <Button x:Name="Button0_0" Click="Button_Click" Grid.Column="0" Grid.Row="0" />
+            <Button x:Name="Button1_0" Click="Button_Click" Grid.Column="1" Grid.Row="0" />
+            <Button x:Name="Button2_0" Click="Button_Click" Grid.Column="2" Grid.Row="0" />
 
-        <TextBlock x:Name="Annoucer" Grid.Row="4" Grid.ColumnSpan="3" />
-    </Grid>
+            <Button x:Name="Button0_1" Click="Button_Click" Grid.Column="0" Grid.Row="1" />
+            <Button x:Name="Button1_1" Click="Button_Click" Grid.Column="1" Grid.Row="1" />
+            <Button x:Name="Button2_1" Click="Button_Click" Grid.Column="2" Grid.Row="1" />
+
+            <Button x:Name="Button0_2" Click="Button_Click" Grid.Column="0" Grid.Row="2" />
+            <Button x:Name="Button1_2" Click="Button_Click" Grid.Column="1" Grid.Row="2" />
+            <Button x:Name="Button2_2" Click="Button_Click" Grid.Column="2" Grid.Row="2" />
+        </Grid>
+        <TextBlock x:Name="Announcer" HorizontalAlignment="Center" Text="{Binding}" FontSize="20"/>
+    </StackPanel>
 </Window>

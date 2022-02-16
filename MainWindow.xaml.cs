@@ -28,9 +28,9 @@ namespace TicTacTow
         /// </summary>
         public MainWindow()
         {
-            g = new GameManager(Container, Annoucer);
+            g = new GameManager();
             InitializeComponent();
-            g.NewGame();
+            g.NewGame(Container, Announcer);
         }
 
         #endregion
