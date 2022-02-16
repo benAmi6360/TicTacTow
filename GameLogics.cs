@@ -4,6 +4,7 @@ using System.Windows.Controls;
 using System.Windows.Media;
 using System.Diagnostics;
 using System.Threading;
+using System.Threading.Tasks;
 
 namespace TicTacTow
 {
@@ -301,9 +302,10 @@ namespace TicTacTow
         /// <summary>
         /// Initiate a new game
         /// </summary>
-        public void NewGame(Grid Container, TextBlock t)
+        public async void NewGame(Grid Container, TextBlock t)
         {
-            NumberOfGames++;
+            Task delay = Task.Delay(1000);
+            await delay;
             Container.Children.Cast<Button>().ToList().ForEach(btn =>
             {
                 btn.Content = string.Empty;
@@ -336,6 +338,7 @@ namespace TicTacTow
             Moves.PlacingAlgorithm();
             if (State.IsGameWon() || State.IsGameTied())
             {
+                NumberOfGames += 1;
                 string res = State.IsGameWon() ? "You have lost" : "You have tied";
                 IsGameEnded = true;
                 NewGame(_Container, txt);
