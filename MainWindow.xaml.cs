@@ -21,22 +21,24 @@ namespace TicTacTow
     /// </summary>
     public partial class MainWindow : Window
     {
+        private GameManager g;
         #region Constructor
         /// <summary>
         /// Default Contructor
         /// </summary>
         public MainWindow()
         {
+            g = new GameManager(Container, Annoucer);
             InitializeComponent();
-            GameManager.NewGame(Container);
+            g.NewGame();
         }
 
         #endregion
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             var b = (Button)sender;
-            if (!GameManager.IsGameEnded)
-                GameManager.PlayGame(b);
+            if (!g.IsGameEnded)
+                g.PlayGame(b);
         }
     }
 }
