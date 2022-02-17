@@ -155,6 +155,35 @@ namespace TicTacTow
             MarkType bl = _GameManager.table[2, 0];
             MarkType br = _GameManager.table[2, 2];
             MarkType mid = _GameManager.table[1, 1];
+            if (tr == mid && tr == MarkType.Nought)
+            {
+                if (_GameManager.CanPlace(2, 0))
+                {
+                    CPUPlace(2, 0);
+                    return true;
+                }
+            }if (tl == mid && tl == MarkType.Nought)
+            {
+                if (_GameManager.CanPlace(2, 2))
+                {
+                    CPUPlace(2, 2);
+                    return true;
+                }
+            }if (bl == mid && bl == MarkType.Nought)
+            {
+                if (_GameManager.CanPlace(0, 2))
+                {
+                    CPUPlace(0, 2);
+                    return true;
+                }
+            }if (br == mid && br == MarkType.Nought)
+            {
+                if (_GameManager.CanPlace(0, 0))
+                {
+                    CPUPlace(0, 0);
+                    return true;
+                }
+            }
             return false;
         }
         /// <summary>
