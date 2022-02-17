@@ -150,6 +150,11 @@ namespace TicTacTow
                     }
                 }
             }
+            MarkType tl = _GameManager.table[0, 0];
+            MarkType tr = _GameManager.table[0, 2];
+            MarkType bl = _GameManager.table[2, 0];
+            MarkType br = _GameManager.table[2, 2];
+            MarkType mid = _GameManager.table[1, 1];
             return false;
         }
         /// <summary>
@@ -252,7 +257,7 @@ namespace TicTacTow
                 foreach (var btn in lst)
                 {
                     if (btn.Name == name)
-                    {
+                    { 
                         btn.Content = "X";
                         btn.IsEnabled = false;
                         btn.Foreground = Brushes.Red;
@@ -383,6 +388,7 @@ namespace TicTacTow
                 }
                 Trace.WriteLine("");
             }
+            Trace.WriteLine("");
         }
     }
     /// <summary>
