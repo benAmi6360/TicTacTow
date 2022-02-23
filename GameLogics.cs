@@ -27,6 +27,7 @@ namespace TicTacTow
             if (CanCPUWin()) return;
             if (CanCPUBlock()) return;
             if (CanCPUBlockSpecificAlgo()) return;
+            if (CanCPUBlockAnotherSpecificAlgo()) return;
             if (CanCPUPlaceInMiddle()) return;
             if (CanCPUPlaceInCorner()) return;
             PlaceInEmptySpace();
@@ -35,7 +36,7 @@ namespace TicTacTow
         /// Checks if the CPU can win
         /// </summary>
         /// <returns>true if CPU can win</returns>
-        public bool CanCPUWin()
+        private bool CanCPUWin()
         {
             for (int i = 0; i <= 2; i++)
             {
@@ -97,7 +98,7 @@ namespace TicTacTow
         /// Checks if the CPU can block
         /// </summary>
         /// <returns>true if CPU can block</returns>
-        public bool CanCPUBlock()
+        private bool CanCPUBlock()
         {
             for (int i = 0; i <= 2; i++)
             {
@@ -186,11 +187,28 @@ namespace TicTacTow
             }
             return false;
         }
+        private bool CanCPUBlockAnotherSpecificAlgo()
+        {
+            // Middle Right
+            MarkType midr = _GameManager.table[1, 2];
+            // Middle Bottom
+            MarkType midb = _GameManager.table[2, 1];
+
+            if (midr == midb && midr == MarkType.Nought)
+            {
+                if (_GameManager.CanPlace(2, 2))
+                {
+                    CPUPlace(2, 2);
+                    return true;
+                }
+            }
+            return false;
+        }
         /// <summary>
         /// Checks if the CPU can block a specific algorithm
         /// </summary>
         /// <returns>true if CPU can block a specific algorithm</returns>
-        public bool CanCPUBlockSpecificAlgo()
+        private bool CanCPUBlockSpecificAlgo()
         {
             //Top Left
             MarkType tl = _GameManager.table[0, 0];
@@ -212,7 +230,7 @@ namespace TicTacTow
         /// Checks if the CPU can place in the middle
         /// </summary>
         /// <returns>true if CPU can place in the middle</returns>
-        public bool CanCPUPlaceInMiddle()
+        private bool CanCPUPlaceInMiddle()
         {
             if (_GameManager.CanPlace(1, 1))
             {
@@ -225,7 +243,7 @@ namespace TicTacTow
         /// Checks if the CPU can place in a corner
         /// </summary>
         /// <returns>true if CPU can place in corner</returns>
-        public bool CanCPUPlaceInCorner()
+        private bool CanCPUPlaceInCorner()
         {
             if (_GameManager.CanPlace(0, 0))
             {
@@ -252,7 +270,7 @@ namespace TicTacTow
         /// <summary>
         /// Places in the first empty space it reaches
         /// </summary>
-        public void PlaceInEmptySpace()
+        private void PlaceInEmptySpace()
         {
             if (_GameManager.CanPlace(0, 1))
             {
@@ -276,7 +294,7 @@ namespace TicTacTow
         /// </summary>
         /// <param name="row">Row on grid</param>
         /// <param name="col">Column on grid</param>
-        public void CPUPlace(int row, int col)
+        private void CPUPlace(int row, int col)
         {
             if (_GameManager.CanPlace(row, col))
             {
